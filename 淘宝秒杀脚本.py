@@ -58,7 +58,7 @@ def buy(browser, buy_time):
 if __name__ == "__main__":
     cur_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
     set_time = input(f"请输入抢购时间，格式如 {cur_time} :\n")
-    # 时间格式："2018-09-06 11:20:00.000000"
+    # 时间格式："2019-06-18 11:20:00.000000"
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('log-level=3') # 6.18 屏蔽ERROR:platform_sensor_reader_win.cc(242)] NOT IMPLEMENTED警告
     chrome_browser = webdriver.Chrome(chrome_options=chrome_options)  # path形参缺省为环境变量 / 打包为exe后缺省为exe当前目录
