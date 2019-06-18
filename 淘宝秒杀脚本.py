@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# 2019/1/20
+# 2019/6/18
 # 淘宝秒杀脚本，扫码登录版
 from selenium import webdriver
 import datetime
@@ -48,7 +48,7 @@ def buy(browser, buy_time):
                             browser.find_element_by_link_text('提交订单').click()
                             now1 = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
                             print("抢购成功时间：%s" % now1)
-                            browser.quit()
+                            #browser.quit() 6.18 此时关闭会导致下单失败，故注释掉
                             return 0
                     except:
                         print("再次尝试提交订单")
@@ -59,7 +59,9 @@ if __name__ == "__main__":
     cur_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
     set_time = input(f"请输入抢购时间，格式如 {cur_time} :\n")
     # 时间格式："2018-09-06 11:20:00.000000"
-    chrome_browser = webdriver.Chrome()  # path形参缺省为环境变量 / 打包为exe后缺省为exe当前目录
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('log-level=3') # 6.18 屏蔽ERROR:platform_sensor_reader_win.cc(242)] NOT IMPLEMENTED警告
+    chrome_browser = webdriver.Chrome(chrome_options=chrome_options)  # path形参缺省为环境变量 / 打包为exe后缺省为exe当前目录
     chrome_browser.maximize_window()
 
     login(chrome_browser)
